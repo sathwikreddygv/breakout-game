@@ -33,11 +33,11 @@ export class Boot extends Scene
         // const PADDLE_SPEED = 500;
         // Combined input check for both keyboard and touch
         if (this.cursors.left.isDown || this.moveLeft) {
-            this.paddle.x -= 7;
+            this.paddle.x -= 10;
             this.paddle.body.position.x = this.paddle.x - this.paddle.width/2;  // Update physics body
         }
         else if (this.cursors.right.isDown || this.moveRight) {
-            this.paddle.x += 7;
+            this.paddle.x += 10;
             this.paddle.body.position.x = this.paddle.x - this.paddle.width/2;  // Update physics body
         }
 
