@@ -122,7 +122,7 @@ export class Boot extends Scene
         this.input.addPointer(1); // Ensure we track at least 2 pointers for multi-touch
 
         // Add touch zones only for mobile screens
-        if (this.scale.width <= 768) {  // Common mobile breakpoint
+        // if (this.scale.width <= 768) {  // Common mobile breakpoint
             this.leftZone = this.add.rectangle(0, 0, this.scale.width / 2, this.scale.height)
                 .setOrigin(0, 0)
                 .setInteractive()
@@ -150,7 +150,7 @@ export class Boot extends Scene
             this.rightZone.on('pointerup', () => {
                 this.moveRight = false;
             });
-        }
+        // }
     }
 
     gameOver() {
