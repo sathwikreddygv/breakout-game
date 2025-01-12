@@ -10,6 +10,8 @@ export class Boot extends Scene
     isGameOver = false
     private moveLeft: boolean = false;
     private moveRight: boolean = false;
+    private leftZone: any;
+    private rightZone: any;
 
     constructor ()
     {
@@ -119,32 +121,36 @@ export class Boot extends Scene
         // Enable both touch and mouse input
         this.input.addPointer(1); // Ensure we track at least 2 pointers for multi-touch
 
-        // Add touch zones for mobile
-        const leftZone = this.add.rectangle(0, 0, this.scale.width / 2, this.scale.height)
-            .setOrigin(0, 0)
-            .setInteractive()
-            .setAlpha(0);
-        
-        const rightZone = this.add.rectangle(this.scale.width / 2, 0, this.scale.width / 2, this.scale.height)
-            .setOrigin(0, 0)
-            .setInteractive()
-            .setAlpha(0);
+        // Add touch zones only for mobile screens
+        if (this.scale.width <= 768) {  // Common mobile breakpoint
+            this.leftZone = this.add.rectangle(0, 0, this.scale.width / 2, this.scale.height)
+                .setOrigin(0, 0)
+                .setInteractive()
+                .setAlpha(1);  // Start invisible
+            
+            this.rightZone = this.add.rectangle(this.scale.width / 2, 0, this.scale.width / 2, this.scale.height)
+                .setOrigin(0, 0)
+                .setInteractive()
+                .setAlpha(1);  // Start invisible
 
-        leftZone.on('pointerdown', () => {
-            this.moveLeft = true;
-        });
+            this.leftZone.on('pointerdown', () => {
+                this.moveLeft = true;
+                console.log('leftZone');
+            });
 
-        leftZone.on('pointerup', () => {
-            this.moveLeft = false;
-        });
+            this.leftZone.on('pointerup', () => {
+                this.moveLeft = false;
+            });
 
-        rightZone.on('pointerdown', () => {
-            this.moveRight = true;
-        });
+            this.rightZone.on('pointerdown', () => {
+                this.moveRight = true;
+                console.log('rightZone');
+            });
 
-        rightZone.on('pointerup', () => {
-            this.moveRight = false;
-        });
+            this.rightZone.on('pointerup', () => {
+                this.moveRight = false;
+            });
+        }
     }
 
     gameOver() {
@@ -153,6 +159,8 @@ export class Boot extends Scene
         this.gameOverText.setVisible(true);
         this.restartButton.setVisible(true);
         this.restartButton.buttonText.setVisible(true);
+        if (this.leftZone) this.leftZone.disableInteractive();
+        if (this.rightZone) this.rightZone.disableInteractive();
     }
 
     restartGame() {
@@ -163,5 +171,7 @@ export class Boot extends Scene
         this.gameOverText.setVisible(false);
         this.restartButton.setVisible(false);
         this.restartButton.buttonText.setVisible(false);
+        if (this.leftZone) this.leftZone.setInteractive();
+        if (this.rightZone) this.rightZone.setInteractive();
     }
 }
