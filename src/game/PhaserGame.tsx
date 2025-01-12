@@ -21,22 +21,22 @@ export const PhaserGame = forwardRef<IRefPhaserGame, IProps>(function PhaserGame
     {
         if (game.current === null)
         {
-            const config: GameConfig = {
-                type: Phaser.AUTO,
-                scale: {
-                    mode: Phaser.Scale.RESIZE,
-                    width: '100%',
-                    height: '100%',
-                    parent: 'game-container',
-                },
-                physics: {
-                    default: 'arcade',
-                    arcade: {
-                        debug: false
-                    }
-                },
-                // ... rest of your config
-            };
+            // const config: GameConfig = {
+            //     type: Phaser.AUTO,
+            //     scale: {
+            //         mode: Phaser.Scale.RESIZE,
+            //         width: '100%',
+            //         height: '100%',
+            //         parent: 'game-container',
+            //     },
+            //     physics: {
+            //         default: 'arcade',
+            //         arcade: {
+            //             debug: false
+            //         }
+            //     },
+            //     // ... rest of your config
+            // };
 
             game.current = StartGame("game-container");
 
