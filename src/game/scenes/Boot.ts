@@ -94,7 +94,7 @@ export class Boot extends Scene
         this.cursors = this.input.keyboard?.createCursorKeys();
 
         // Create game over text (hidden initially)
-        this.gameOverText = this.add.text(500, 300, 'YOU SUCK!\nGAME OVER', {
+        this.gameOverText = this.add.text(500, 300, 'GAME OVER', {
             fontSize: '64px',
             color: '#ffffff',
             align: 'center',
