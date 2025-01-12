@@ -8,6 +8,8 @@ export class Boot extends Scene
     gameOverText:any
     restartButton:any
     isGameOver = false
+    private moveLeft: boolean = false;
+    private moveRight: boolean = false;
 
     constructor ()
     {
@@ -26,14 +28,17 @@ export class Boot extends Scene
     update() {
         if (this.isGameOver) return;
 
-        // Handle paddle movement
-        if (this.cursors.left.isDown) {
+        // const PADDLE_SPEED = 500;
+        // Combined input check for both keyboard and touch
+        if (this.cursors.left.isDown || this.moveLeft) {
             this.paddle.x -= 7;
             this.paddle.body.position.x = this.paddle.x - this.paddle.width/2;  // Update physics body
-        } else if (this.cursors.right.isDown) {
+        }
+        else if (this.cursors.right.isDown || this.moveRight) {
             this.paddle.x += 7;
             this.paddle.body.position.x = this.paddle.x - this.paddle.width/2;  // Update physics body
         }
+
 
         // Keep paddle within the screen bounds
         this.paddle.x = Phaser.Math.Clamp(this.paddle.x, 50, 1000);
@@ -110,6 +115,36 @@ export class Boot extends Scene
         this.restartButton.buttonText = buttonText;
         this.restartButton.setVisible(false);
         buttonText.setVisible(false);
+
+        // Enable both touch and mouse input
+        this.input.addPointer(1); // Ensure we track at least 2 pointers for multi-touch
+
+        // Add touch zones for mobile
+        const leftZone = this.add.rectangle(0, 0, this.scale.width / 2, this.scale.height)
+            .setOrigin(0, 0)
+            .setInteractive()
+            .setAlpha(0);
+        
+        const rightZone = this.add.rectangle(this.scale.width / 2, 0, this.scale.width / 2, this.scale.height)
+            .setOrigin(0, 0)
+            .setInteractive()
+            .setAlpha(0);
+
+        leftZone.on('pointerdown', () => {
+            this.moveLeft = true;
+        });
+
+        leftZone.on('pointerup', () => {
+            this.moveLeft = false;
+        });
+
+        rightZone.on('pointerdown', () => {
+            this.moveRight = true;
+        });
+
+        rightZone.on('pointerup', () => {
+            this.moveRight = false;
+        });
     }
 
     gameOver() {
