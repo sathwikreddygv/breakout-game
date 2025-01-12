@@ -2,12 +2,12 @@ import { Scene } from 'phaser';
 
 export class Boot extends Scene
 {   
-    ball
-    cursors
-    paddle
-    gameOverText
-    restartButton
-    isGameOver = false
+    private ball!: Phaser.GameObjects.Arc & { body: Phaser.Physics.Arcade.Body }
+    private cursors!: Phaser.Types.Input.Keyboard.CursorKeys
+    private paddle!: Phaser.GameObjects.Rectangle & { body: Phaser.Physics.Arcade.StaticBody }
+    private gameOverText!: Phaser.GameObjects.Text
+    private restartButton!: Phaser.GameObjects.Rectangle & { buttonText: Phaser.GameObjects.Text }
+    private isGameOver = false
 
     constructor ()
     {

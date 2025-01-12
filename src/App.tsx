@@ -1,6 +1,6 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { IRefPhaserGame, PhaserGame } from './game/PhaserGame';
-import { MainMenu } from './game/scenes/MainMenu';
+// import { MainMenu } from './game/scenes/MainMenu';
 
 function App()
 {
@@ -74,7 +74,7 @@ function App()
     // }
 
     // Event emitted from the PhaserGame component
-    const currentScene = (scene: Phaser.Scene) => {
+    const currentScene = () => {
 
         // setCanMoveSprite(scene.scene.key !== 'MainMenu');
         
